@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "3306:3306" # SQL port inside the container
+    expose:
+      - "3306"
+    volumes:
+      - my-db:/var/lib/mysql
+  adminer: # Enables db management without mysql workbench
+      image: adminer
+      restart: always
+      ports:
+        - "9000:8080"
+
+volumes:
+  my-db:
+
+    ## "temperature": 219.172, "pressure": 1095.08, "dhtHumidity": 25.5, "altitude": -559.688, "dhtTemperature": 25.5

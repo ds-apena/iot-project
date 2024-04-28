@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    url: "jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_example"
+    username: springuser
+    password: ThePassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mqtt:
+  broker: "tcp://broker.hivemq.com"
+  clientId: "subscribe_client"
+  topic: "nico"
+  qos: 0;
