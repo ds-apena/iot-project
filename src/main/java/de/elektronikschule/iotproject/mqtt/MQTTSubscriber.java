@@ -71,7 +71,6 @@ public class MQTTSubscriber {
                   measurement.setDhtTemperature(dhtTemperature);
 
                   repo.save(measurement);
-                  logger.info("Entry created!");
                } catch (IOException e) {
                   logger.debug(e.getMessage());
                }
