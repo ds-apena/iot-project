@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-EN">
+<head>
+  <title>Line Chart Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<canvas id="altitude" width="600" height="400"></canvas>
+<canvas id="dhtHumidity" width="600" height="400"></canvas>
+<canvas id="dhtTemperature" width="600" height="400"></canvas>
+<canvas id="pressure" width="600" height="400"></canvas>
+<canvas id="temperature" width="600" height="400"></canvas>
+<script th:inline="javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    var ctx1 = document.getElementById('altitude').getContext('2d');
+    var altitude = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: [[${timestamp}]],
+        datasets: [{
+          label: [[${label1}]],
+          data: [[${data1}]],
+          borderColor: '#1979a9',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false
+      }
+    });
+
+    var ctx2 = document.getElementById('dhtHumidity').getContext('2d');
+    var dhtHumidity = new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: [[${timestamp}]],
+        datasets: [{
+          label: [[${label2}]],
+          data: [[${data2}]],
+          borderColor: '#FAD370',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false
+      }
+    });
+
+    var ctx3 = document.getElementById('dhtTemperature').getContext('2d');
+    var dhtTemperature = new Chart(ctx3, {
+      type: 'line',
+      data: {
+        labels: [[${timestamp}]],
+        datasets: [{
+          label: [[${label3}]],
+          data: [[${data3}]],
+          borderColor: '#FF6F00',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false
+      }
+    });
+
+    var ctx4 = document.getElementById('pressure').getContext('2d');
+    var pressure = new Chart(ctx4, {
+      type: 'line',
+      data: {
+        labels: [[${timestamp}]],
+        datasets: [{
+          label: [[${label4}]],
+          data: [[${data4}]],
+          borderColor: '#8E24AA',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false
+      }
+    });
+
+    var ctx5 = document.getElementById('temperature').getContext('2d');
+    var temperature = new Chart(ctx5, {
+      type: 'line',
+      data: {
+        labels: [[${timestamp}]],
+        datasets: [{
+          label: [[${label5}]],
+          data: [[${data5}]],
+          borderColor: '#43A047',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false
+      }
+    });
+
+    function updateCharts() {
+      fetch('/iot/showMeasurements?continue')
+              .then(response => response.json())
+              .then(data => {
+                // altitude.data.labels.push((data) => data.label)
+                // altitude.data.datasets.forEach((dataset) => {
+                //   dataset.data.push((data) => data.value)
+                // })
+                altitude.data.labels = data.labels;
+                altitude.data.datasets[0].data = data.values;
+                altitude.update();
+
+                dhtHumidity.data.labels = data.labels;
+                dhtHumidity.data.datasets[0].data = data.values;
+                dhtHumidity.update();
+
+                dhtTemperature.data.labels = data.labels;
+                dhtTemperature.data.datasets[0].data = data.values;
+                dhtTemperature.update();
+
+                pressure.data.labels = data.labels;
+                pressure.data.datasets[0].data = data.values;
+                pressure.update();
+
+                temperature.data.labels = data.labels;
+                temperature.data.datasets[0].data = data.values;
+                temperature.update();
+              })
+    }
+
+    setInterval(updateCharts, 5000);
+  });
+</script>
+</body>
+</html>
+
