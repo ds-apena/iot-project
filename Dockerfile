@@ -1,9 +1,7 @@
-FROM maven:3.8.3-openjdk-17 AS build
+FROM eclipse-temurin:17-jdk AS build
 LABEL authors="apena"
 
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
-EXPOSE 8080
+VOLUME /tmp
+COPY target/*.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "/home/app/target/spring"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]

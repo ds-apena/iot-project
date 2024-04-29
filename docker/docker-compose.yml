@@ -1,23 +1,30 @@
 version: '3.8'
 
 services:
-  db:
+  mysql-db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306:3306" # SQL port inside the container
+      - "3307:3306" # SQL port inside the container
     expose:
       - "3306"
     volumes:
       - ./mysql/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
-  adminer: # Enables db management without mysql workbench
-      image: adminer
-      restart: always
-      ports:
-        - "9000:8080"
+#  iot-project:
+#    build:
+#      context: ../
+#      dockerfile: Dockerfile
+#    container_name: iot-project
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - app-network
+#    depends_on:
+#      - mysql-db
 
-volumes:
-  my-db:
+networks:
+  app-network:
+
