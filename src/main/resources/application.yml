@@ -1,7 +1,9 @@
+## DB Config ##
 spring:
   jpa:
     hibernate:
       ddl-auto: update
+    open-in-view: true
     show-sql: true
 
   datasource:
@@ -10,6 +12,7 @@ spring:
     password: ThePassword
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+## Broker configuration ##
 mqtt:
   broker: "tcp://broker.hivemq.com"
   clientId: "subscribe_client"
