@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * The MQTT Client subscribes to the topic exposed by the broker while
+ * saving the received data in the database,
+ */
 @Component
 public class MQTTSubscriber {
    private final MeasurementRepository repo;
