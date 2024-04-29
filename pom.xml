@@ -19,6 +19,7 @@
       <paho.client.mqtt.version>1.2.5</paho.client.mqtt.version>
       <log4j.version>2.23.1</log4j.version>
       <jackson.version>2.17.0</jackson.version>
+      <chartjs.version>4.4.2</chartjs.version>
    </properties>
    <dependencies>
       <dependency>
@@ -52,6 +53,31 @@
          <scope>test</scope>
       </dependency>
       <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-devtools</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-security</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-config</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.thymeleaf.extras</groupId>
+         <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
          <groupId>org.projectlombok</groupId>
          <artifactId>lombok</artifactId>
          <version>${lombok.version}</version>
@@ -82,7 +108,11 @@
          <artifactId>jackson-core</artifactId>
          <version>${jackson.version}</version>
       </dependency>
-
+      <dependency>
+         <groupId>org.webjars.npm</groupId>
+         <artifactId>chart.js</artifactId>
+         <version>${chartjs.version}</version>
+      </dependency>
    </dependencies>
 
    <build>
